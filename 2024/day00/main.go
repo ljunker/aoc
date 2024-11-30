@@ -2,6 +2,7 @@ package main
 
 import (
 	"aoc-go/util"
+	_ "embed"
 	"flag"
 	"fmt"
 	"strings"
@@ -11,7 +12,6 @@ import (
 var input string
 
 func init() {
-	// do this in init (not main) so test file has same input
 	input = strings.TrimRight(input, "\n")
 	if len(input) == 0 {
 		panic("empty input.txt file")
@@ -26,12 +26,18 @@ func main() {
 
 	if part == 1 {
 		ans := part1(input)
-		util.CopyToClipboardMac(fmt.Sprintf("%v", ans))
 		fmt.Println("Output:", ans)
+		err := util.CopyToClipboard(fmt.Sprintf("%v", ans))
+		if err != nil {
+			_ = fmt.Errorf("error running copytoclipboard %w", err)
+		}
 	} else {
 		ans := part2(input)
-		util.CopyToClipboardMac(fmt.Sprintf("%v", ans))
 		fmt.Println("Output:", ans)
+		err := util.CopyToClipboard(fmt.Sprintf("%v", ans))
+		if err != nil {
+			_ = fmt.Errorf("error running copytoclipboard %w", err)
+		}
 	}
 }
 
