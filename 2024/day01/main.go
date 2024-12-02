@@ -79,7 +79,6 @@ func getLists(input string) ([]int, []int) {
 		leftList = append(leftList, number)
 		number, _ = strconv.Atoi(leftAndRight[1])
 		rightList = append(rightList, number)
-		fmt.Println(leftAndRight[0], leftAndRight[1])
 	}
 	return leftList, rightList
 }
