@@ -154,7 +154,6 @@ func part2(input string) int {
 	grid, guard, width, height := makeGrid(input)
 	height++
 	s := map[image.Point]bool{}
-	drawGrid(s, guard, grid, width, height)
 	for !offGrounds(guard, width, height) {
 		if obstacleInFront(guard, grid, width, height) {
 			turn90Degrees(&guard)
@@ -169,7 +168,7 @@ func part2(input string) int {
 	maxHeight++
 	height++
 	positions := 0
-	for possible, _ := range s {
+	for possible := range s {
 		grid, guard, width, height = makeGrid(input)
 		height++
 		current := thing{isObstacle: true}
