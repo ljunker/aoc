@@ -152,33 +152,44 @@ type locationAndDirection struct {
 
 func part2(input string) int {
 	grid, guard, width, height := makeGrid(input)
-	maxWidth, maxHeight := width, height
+	height++
+	s := map[image.Point]bool{}
+	drawGrid(s, guard, grid, width, height)
+	for !offGrounds(guard, width, height) {
+		if obstacleInFront(guard, grid, width, height) {
+			turn90Degrees(&guard)
+		} else {
+			s[guard.loc] = true
+			takeStepForward(&guard)
+		}
+	}
+
+	grid, guard, width, height = makeGrid(input)
+	maxHeight := height
 	maxHeight++
 	height++
 	positions := 0
-	for y := 0; y < maxHeight; y++ {
-		for x := 0; x < maxWidth; x++ {
-			grid, guard, width, height = makeGrid(input)
-			height++
-			current := thing{isObstacle: true}
-			grid[image.Point{X: x, Y: y}] = current
-			s := map[locationAndDirection]bool{}
-			for !offGrounds(guard, width, height) {
-				if obstacleInFront(guard, grid, width, height) {
-					turn90Degrees(&guard)
-				} else {
-					var loc locationAndDirection
-					loc.loc = guard.loc
-					loc.dir = guard.dir
-					if s[loc] {
-						//loop detected
-						positions++
-						//drawGrid(make(map[image.Point]bool), guard, grid, width, height)
-						break
-					}
-					s[loc] = true
-					takeStepForward(&guard)
+	for possible, _ := range s {
+		grid, guard, width, height = makeGrid(input)
+		height++
+		current := thing{isObstacle: true}
+		grid[possible] = current
+		s := map[locationAndDirection]bool{}
+		for !offGrounds(guard, width, height) {
+			if obstacleInFront(guard, grid, width, height) {
+				turn90Degrees(&guard)
+			} else {
+				var loc locationAndDirection
+				loc.loc = guard.loc
+				loc.dir = guard.dir
+				if s[loc] {
+					//loop detected
+					positions++
+					//drawGrid(make(map[image.Point]bool), guard, grid, width, height)
+					break
 				}
+				s[loc] = true
+				takeStepForward(&guard)
 			}
 		}
 	}
