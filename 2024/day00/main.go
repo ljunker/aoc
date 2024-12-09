@@ -19,27 +19,19 @@ func init() {
 }
 
 func main() {
-	var part int
-	flag.IntVar(&part, "part", 1, "part 1 or 2")
-	flag.Parse()
-	fmt.Println("Running part", part)
-
-	if part == 1 {
-		part1Timed := util.MeasureRuntime(part1)
-		ans := part1Timed(input)
-		fmt.Println("Output:", ans)
-		err := util.CopyToClipboard(fmt.Sprintf("%v", ans))
-		if err != nil {
-			_ = fmt.Errorf("error running copytoclipboard %w", err)
-		}
-	} else {
-		part2Timed := util.MeasureRuntime(part2)
-		ans := part2Timed(input)
-		fmt.Println("Output:", ans)
-		err := util.CopyToClipboard(fmt.Sprintf("%v", ans))
-		if err != nil {
-			_ = fmt.Errorf("error running copytoclipboard %w", err)
-		}
+	part1Timed := util.MeasureRuntime(part1)
+	ans := part1Timed(input)
+	fmt.Println("Output:", ans)
+	err := util.CopyToClipboard(fmt.Sprintf("%v", ans))
+	if err != nil {
+		_ = fmt.Errorf("error running copytoclipboard %w", err)
+	}
+	part2Timed := util.MeasureRuntime(part2)
+	ans = part2Timed(input)
+	fmt.Println("Output:", ans)
+	err = util.CopyToClipboard(fmt.Sprintf("%v", ans))
+	if err != nil {
+		_ = fmt.Errorf("error running copytoclipboard %w", err)
 	}
 }
 
