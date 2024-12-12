@@ -3,6 +3,7 @@ package main
 import (
 	"aoc-go/util"
 	_ "embed"
+	"encoding"
 	"flag"
 	"fmt"
 	"strings"
@@ -19,6 +20,7 @@ func init() {
 }
 
 func main() {
+	fmt.Printf("Part 1:")
 	part1Timed := util.MeasureRuntime(part1)
 	ans := part1Timed(input)
 	fmt.Println("Output:", ans)
@@ -26,6 +28,7 @@ func main() {
 	if err != nil {
 		_ = fmt.Errorf("error running copytoclipboard %w", err)
 	}
+	fmt.Printf("Part 2:")
 	part2Timed := util.MeasureRuntime(part2)
 	ans = part2Timed(input)
 	fmt.Println("Output:", ans)
