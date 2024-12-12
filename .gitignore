@@ -1,5 +1,5 @@
 .idea
 **/input.txt
 **/i.txt
-**/sample.txt
+**/sample*.txt
 .venv
