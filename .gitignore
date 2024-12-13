@@ -3,3 +3,4 @@
 **/i.txt
 **/sample*.txt
 .venv
+.env
