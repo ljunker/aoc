@@ -1,7 +1,7 @@
 package main
 
 import (
-	"aoc-go/util"
+	"aoc-go/2024-go/util"
 	_ "embed"
 	"fmt"
 	"strconv"
