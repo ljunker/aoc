@@ -4,3 +4,6 @@
 **/sample*.txt
 .venv
 .env
+.aoc_tiles/*
+!.aoc_tiles/tiles/
+session.cookie
