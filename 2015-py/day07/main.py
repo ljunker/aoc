@@ -6,11 +6,10 @@ from kryptikkaocutils.Input import write_input_to_file
 class Wire:
     def __init__(self, name):
         self.name = name
-        self.signal = None  # Will hold the evaluated value
-        self.operation = None  # Holds the operation that computes this wire's value
+        self.signal = None
+        self.operation = None
 
     def get_value(self):
-        """Evaluate and cache the wire's value if not already set."""
         if self.signal is None and self.operation:
             self.signal = self.operation.evaluate()
         return self.signal
@@ -61,28 +60,26 @@ class Circuit:
         self.wires = {}
 
     def get_wire(self, name):
-        """Retrieve or create a wire."""
         if name not in self.wires:
             self.wires[name] = Wire(name)
         return self.wires[name]
 
     def add_instruction(self, instruction):
-        """Parse and add an instruction to the circuit."""
         parts = instruction.strip().split(" -> ")
         expression, target_name = parts[0], parts[1]
         target_wire = self.get_wire(target_name)
 
-        if expression.isdigit():  # Direct value assignment
+        if expression.isdigit():
             target_wire.signal = int(expression)
             return
-        elif expression.isalpha():  # Direct wire-to-wire assignment
+        elif expression.isalpha():
             source_wire = self.get_wire(expression)
             target_wire.operation = UnaryOperation("ASSIGN", source_wire, target_wire)
-        elif "NOT" in expression:  # Unary NOT operation
+        elif "NOT" in expression:
             operand_name = expression.split("NOT ")[1]
             operand_wire = self.get_wire(operand_name)
             target_wire.operation = UnaryOperation("NOT", operand_wire, target_wire)
-        else:  # Binary operation
+        else:
             for operator in ["AND", "OR", "LSHIFT", "RSHIFT"]:
                 if operator in expression:
                     left_name, right_name = expression.split(f" {operator} ")
@@ -99,12 +96,10 @@ class Circuit:
         self.wires[target_name] = target_wire
 
     def evaluate(self, wire_name):
-        """Get the value of a specific wire."""
         wire = self.get_wire(wire_name)
         return wire.get_value()
 
     def evaluate_all(self):
-        """Evaluate all wires and return their values."""
         return {name: wire.get_value() for name, wire in self.wires.items()}
 
 
