@@ -45,7 +45,7 @@
   <img src=".aoc_tiles/tiles/2024/14.png" width="161px">
 </a>
 <h1 align="center">
-  2015 - 12 ⭐ - Python
+  2015 - 14 ⭐ - Python
 </h1>
 <a href="2015-py/day01/main.py">
   <img src=".aoc_tiles/tiles/2015/01.png" width="161px">
@@ -64,5 +64,8 @@
 </a>
 <a href="2015-py/day06/main.py">
   <img src=".aoc_tiles/tiles/2015/06.png" width="161px">
+</a>
+<a href="2015-py/day07/main.py">
+  <img src=".aoc_tiles/tiles/2015/07.png" width="161px">
 </a>
 <!-- AOC TILES END -->

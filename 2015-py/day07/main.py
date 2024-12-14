@@ -1,13 +1,12 @@
 import os
 
-import dotenv
-import requests
 from kryptikkaocutils.Input import write_input_to_file
+
 
 class Wire:
     def __init__(self, name):
         self.name = name
-        self.signal = None # Will hold the evaluated value
+        self.signal = None  # Will hold the evaluated value
         self.operation = None  # Holds the operation that computes this wire's value
 
     def get_value(self):
@@ -108,14 +107,13 @@ class Circuit:
         """Evaluate all wires and return their values."""
         return {name: wire.get_value() for name, wire in self.wires.items()}
 
+
 def part1(circuit):
     print(circuit.evaluate("a"))
 
 
 def part2(inputs):
     print(circuit.evaluate("a"))
-
-
 
 
 def gen_wires(inputs):
@@ -131,5 +129,5 @@ if __name__ == "__main__":
         write_input_to_file(2015, 7, fname)
     inputs = open(fname).readlines()
     circuit = gen_wires(inputs)
-    #part1(circuit)
+    # part1(circuit)
     part2(inputs)
