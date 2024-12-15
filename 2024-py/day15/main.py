@@ -53,26 +53,26 @@ def try_move(grid, current, d):
         return True
 
 
+def arrow_to_dir(a):
+    if a == '^':
+        return (0, -1)
+    elif a == 'v':
+        return (0, 1)
+    elif a == '>':
+        return (1, 0)
+    elif a == '<':
+        return (-1, 0)
+
+
 @timer
 def part1(grid, w, h, robot, instructions):
     #display_grid(grid, w, h)
     for i in instructions:
-        if i == '^':
-            d = (0, -1)
-            if try_move(grid, robot, d):
-                robot = (robot[0] + d[0], robot[1] + d[1])
-        elif i == 'v':
-            d = (0, 1)
-            if try_move(grid, robot, d):
-                robot = (robot[0] + d[0], robot[1] + d[1])
-        elif i == '>':
-            d = (1, 0)
-            if try_move(grid, robot, d):
-                robot = (robot[0] + d[0], robot[1] + d[1])
-        elif i == '<':
-            d = (-1, 0)
-            if try_move(grid, robot, d):
-                robot = (robot[0] + d[0], robot[1] + d[1])
+        if i == '\n':
+            continue
+        d = arrow_to_dir(i)
+        if try_move(grid, robot, d):
+            robot = (robot[0] + d[0], robot[1] + d[1])
         # display_grid(grid, w, h)
     #display_grid(grid, w, h)
     print(calc_gps(grid, w, h))
@@ -108,29 +108,15 @@ def calc_gps_2(grid, w, h):
 def part2(grid, w, h, robot, instructions):
     #display_grid(grid, w, h)
     for i in instructions:
-        if i == '^':
-            d = (0, -1)
-            if try_move_2(grid, robot, d):
-                move(grid, robot, d)
-                robot = (robot[0] + d[0], robot[1] + d[1])
-        elif i == 'v':
-            d = (0, 1)
-            if try_move_2(grid, robot, d):
-                move(grid, robot, d)
-                robot = (robot[0] + d[0], robot[1] + d[1])
-        elif i == '>':
-            d = (1, 0)
-            if try_move_2(grid, robot, d):
-                move(grid, robot, d)
-                robot = (robot[0] + d[0], robot[1] + d[1])
-        elif i == '<':
-            d = (-1, 0)
-            if try_move_2(grid, robot, d):
-                move(grid, robot, d)
-                robot = (robot[0] + d[0], robot[1] + d[1])
+        if i == '\n':
+            continue
+        d = arrow_to_dir(i)
+        if try_move_2(grid, robot, d):
+            move(grid, robot, d)
+            robot = (robot[0] + d[0], robot[1] + d[1])
         #display_grid(grid, w, h)
     #display_grid(grid, w, h)
-    print(calc_gps(grid, w, h))
+    print(calc_gps_2(grid, w, h))
 
 
 def make_grid_2(lines):
