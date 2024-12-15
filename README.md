@@ -44,9 +44,6 @@
 <a href="2024-py/day14/day14.py">
   <img src=".aoc_tiles/tiles/2024/14.png" width="161px">
 </a>
-<a href="2024-py/day15/day15.py">
-  <img src=".aoc_tiles/tiles/2024/15.png" width="161px">
-</a>
 <h1 align="center">
   2015 - 14 ⭐ - Python
 </h1>
