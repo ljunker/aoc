@@ -1,3 +1,5 @@
+from kryptikkaocutils.Timer import timer
+
 def try_move_2(grid, current, d):
     next = (current[0] + d[0], current[1] + d[1])
     if grid[next] == '#':
@@ -51,8 +53,9 @@ def try_move(grid, current, d):
         return True
 
 
+@timer
 def part1(grid, w, h, robot, instructions):
-    display_grid(grid, w, h)
+    #display_grid(grid, w, h)
     for i in instructions:
         if i == '^':
             d = (0, -1)
@@ -71,8 +74,8 @@ def part1(grid, w, h, robot, instructions):
             if try_move(grid, robot, d):
                 robot = (robot[0] + d[0], robot[1] + d[1])
         # display_grid(grid, w, h)
-    display_grid(grid, w, h)
-    print(calc_gps_2(grid, w, h))
+    #display_grid(grid, w, h)
+    print(calc_gps(grid, w, h))
 
 
 def display_grid(grid, w, h):
@@ -92,7 +95,7 @@ def calc_gps(grid, w, h):
     return s
 
 
-def calc_gps(grid, w, h):
+def calc_gps_2(grid, w, h):
     s = 0
     for y in range(h):
         for x in range(w):
@@ -101,8 +104,9 @@ def calc_gps(grid, w, h):
     return s
 
 
+@timer
 def part2(grid, w, h, robot, instructions):
-    display_grid(grid, w, h)
+    #display_grid(grid, w, h)
     for i in instructions:
         if i == '^':
             d = (0, -1)
@@ -125,7 +129,7 @@ def part2(grid, w, h, robot, instructions):
                 move(grid, robot, d)
                 robot = (robot[0] + d[0], robot[1] + d[1])
         #display_grid(grid, w, h)
-    display_grid(grid, w, h)
+    #display_grid(grid, w, h)
     print(calc_gps(grid, w, h))
 
 
@@ -169,6 +173,6 @@ if __name__ == "__main__":
     parts = open(fname).read().split("\n\n")
     grid, w, h, robot = make_grid([line for line in parts[0].split("\n")])
     instructions = parts[1]
-    # part1(grid, w, h, robot, instructions)
+    part1(grid, w, h, robot, instructions)
     grid, w, h, robot = make_grid_2([line for line in parts[0].split("\n")])
     part2(grid, w, h, robot, instructions)
