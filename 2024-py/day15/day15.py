@@ -1,82 +1,39 @@
-import os
-
-from kryptikkaocutils.Input import write_input_to_file
-
-
 def try_move_2(grid, current, d):
     next = (current[0] + d[0], current[1] + d[1])
     if grid[next] == '#':
         return False
-    if grid[current] == '@' and grid[next] == '.':
+    if grid[next] == '.':
         return True
     if d[0] == 0:
-        if grid[next] == '.':
-            if grid[current] == '[':
-                neighbor_next = (next[0] + 1, next[1])
-                return grid[neighbor_next] == '.'
-            if grid[current] == ']':
-                neighbor_next = (next[0] - 1, next[1])
-                return grid[neighbor_next] == '.'
-        else:
-            if grid[current] == '[':
-                return try_move_2(grid, next, d) and try_move_2(grid, (next[0] + 1, next[1]), d)
-            elif grid[current] == ']':
-                return try_move_2(grid, next, d) and try_move_2(grid, (next[0] - 1, next[1]), d)
-            else:
-                return try_move_2(grid, next, d)
-    else:
-        if grid[next] == '.':
-            return True
+        if grid[next] == '[':
+            neighbor = (next[0] + 1, next[1])
+            return try_move_2(grid, next, d) and try_move_2(grid, neighbor, d)
+        elif grid[next] == ']':
+            neighbor = (next[0] - 1, next[1])
+            return try_move_2(grid, next, d) and try_move_2(grid, neighbor, d)
         else:
             return try_move_2(grid, next, d)
+    else:
+        return try_move_2(grid, next, d)
+
 
 def move(grid, current, d):
     next = (current[0] + d[0], current[1] + d[1])
-    if grid[current] == '@' and grid[next] == '.':
-        grid[next] = grid[current]
-        grid[current] = '.'
-        return
     if d[0] != 0:
-        if grid[next] == '.':
-            grid[next] = grid[current]
-        else:
+        if grid[next] != '.':
             move(grid, next, d)
-            grid[next] = grid[current]
-        grid[current] = '.'
     else:
-        if grid[current] == '[':
-            neighbor_next = (next[0] + 1, next[1])
-            neighbor_current = (current[0] + 1, current[1])
-            if grid[next] == '.':
-                grid[next] = grid[current]
-            else:
+        if grid[next] != '.':
+            if grid[next] == '[':
+                neighbor = (next[0] + 1, next[1])
                 move(grid, next, d)
-                grid[next] = grid[current]
-            grid[current] = '.'
-            if grid[neighbor_next] == '.':
-                grid[neighbor_next] = grid[neighbor_current]
-            else:
-                move(grid, neighbor_next, d)
-                grid[neighbor_next] = grid[neighbor_current]
-            grid[neighbor_current] = '.'
-        if grid[current] == ']':
-            neighbor_next = (next[0] - 1, next[1])
-            neighbor_current = (current[0] - 1, current[1])
-            if grid[next] == '.':
-                grid[next] = grid[current]
-            else:
+                move(grid, neighbor, d)
+            elif grid[next] == ']':
+                neighbor = (next[0] - 1, next[1])
                 move(grid, next, d)
-                grid[next] = grid[current]
-            grid[current] = '.'
-            if grid[neighbor_next] == '.':
-                grid[neighbor_next] = grid[neighbor_current]
-            else:
-                move(grid, neighbor_next, d)
-                grid[neighbor_next] = grid[neighbor_current]
-            grid[neighbor_current] = '.'
-
-
-
+                move(grid, neighbor, d)
+    grid[next] = grid[current]
+    grid[current] = '.'
 
 
 def try_move(grid, current, d):
@@ -115,7 +72,7 @@ def part1(grid, w, h, robot, instructions):
                 robot = (robot[0] + d[0], robot[1] + d[1])
         # display_grid(grid, w, h)
     display_grid(grid, w, h)
-    print(calc_gps(grid, w, h))
+    print(calc_gps_2(grid, w, h))
 
 
 def display_grid(grid, w, h):
@@ -131,6 +88,15 @@ def calc_gps(grid, w, h):
     for y in range(h):
         for x in range(w):
             if grid[(x, y)] == 'O':
+                s += 100 * y + x
+    return s
+
+
+def calc_gps(grid, w, h):
+    s = 0
+    for y in range(h):
+        for x in range(w):
+            if grid[(x, y)] == '[':
                 s += 100 * y + x
     return s
 
@@ -158,7 +124,7 @@ def part2(grid, w, h, robot, instructions):
             if try_move_2(grid, robot, d):
                 move(grid, robot, d)
                 robot = (robot[0] + d[0], robot[1] + d[1])
-        display_grid(grid, w, h)
+        #display_grid(grid, w, h)
     display_grid(grid, w, h)
     print(calc_gps(grid, w, h))
 
@@ -200,11 +166,9 @@ def make_grid(lines):
 
 if __name__ == "__main__":
     fname = "i.txt"
-    if not os.path.isfile(fname):
-        write_input_to_file(2024, 15, fname)
     parts = open(fname).read().split("\n\n")
     grid, w, h, robot = make_grid([line for line in parts[0].split("\n")])
     instructions = parts[1]
-    part1(grid, w, h, robot, instructions)
+    # part1(grid, w, h, robot, instructions)
     grid, w, h, robot = make_grid_2([line for line in parts[0].split("\n")])
     part2(grid, w, h, robot, instructions)
