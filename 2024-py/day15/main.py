@@ -66,15 +66,12 @@ def arrow_to_dir(a):
 
 @timer
 def part1(grid, w, h, robot, instructions):
-    #display_grid(grid, w, h)
     for i in instructions:
         if i == '\n':
             continue
         d = arrow_to_dir(i)
         if try_move(grid, robot, d):
             robot = (robot[0] + d[0], robot[1] + d[1])
-        # display_grid(grid, w, h)
-    #display_grid(grid, w, h)
     print(calc_gps(grid, w, h))
 
 
@@ -106,7 +103,6 @@ def calc_gps_2(grid, w, h):
 
 @timer
 def part2(grid, w, h, robot, instructions):
-    #display_grid(grid, w, h)
     for i in instructions:
         if i == '\n':
             continue
@@ -114,8 +110,6 @@ def part2(grid, w, h, robot, instructions):
         if try_move_2(grid, robot, d):
             move(grid, robot, d)
             robot = (robot[0] + d[0], robot[1] + d[1])
-        #display_grid(grid, w, h)
-    #display_grid(grid, w, h)
     print(calc_gps_2(grid, w, h))
 
 
