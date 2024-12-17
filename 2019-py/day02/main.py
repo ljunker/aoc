@@ -2,21 +2,7 @@ import copy
 
 from kryptikkaocutils.Timer import timer
 
-
-def run_program(program):
-    instr = 0
-    op = 0
-    while op != 99:
-        op = program[instr]
-        if op == 1:
-            pos = [program[instr + 1], program[instr + 2], program[instr + 3]]
-            program[pos[2]] = program[pos[0]] + program[pos[1]]
-            instr += 4
-        elif op == 2:
-            pos = [program[instr + 1], program[instr + 2], program[instr + 3]]
-            program[pos[2]] = program[pos[0]] * program[pos[1]]
-            instr += 4
-    return program[0]
+from IntComputer.computer import IntComputer
 
 
 @timer
@@ -25,8 +11,10 @@ def part1():
     program = [int(num) for num in f.read().split(",")]
     program[1] = 12
     program[2] = 2
-    result = run_program(program)
-    print(result)
+    c = IntComputer(program)
+    c.run_program()
+    print(c.result())
+
 
 @timer
 def part2():
@@ -38,9 +26,11 @@ def part2():
             program = copy.deepcopy(program_original)
             program[1] = noun
             program[2] = verb
-            result = run_program(program)
+            c = IntComputer(program)
+            c.run_program()
+            result = c.result()
             if result == 19690720:
-                print(noun*100 + verb)
+                print(noun * 100 + verb)
 
 
 part1()
