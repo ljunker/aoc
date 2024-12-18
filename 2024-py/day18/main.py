@@ -59,5 +59,4 @@ while True:
         right = mid
     else:
         left = mid
-
 print("p2:", b[left])
