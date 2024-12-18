@@ -1,7 +1,11 @@
 class IntComputer:
-    def __init__(self, program):
+    def __init__(self, program, input_piped_mode=False, output_piped_mode=False):
         self.program = program
         self.instr = 0
+        self.piped_input = []
+        self.input_piped_mode = input_piped_mode
+        self.piped_output = []
+        self.output_piped_mode = output_piped_mode
 
     def code_to_param_count(self, code):
         codes = {
@@ -42,6 +46,8 @@ class IntComputer:
                 self.multiplication(values)
                 self.instr += 4
             elif code == 3:
+                if self.input_piped_mode and self.piped_input == []:
+                    break
                 self.input(values)
                 self.instr += 2
             elif code == 4:
@@ -59,6 +65,7 @@ class IntComputer:
             elif code == 8:
                 self.equals(values)
                 self.instr += 4
+        return code == 99
 
     def result(self):
         return self.program[0]
@@ -78,11 +85,14 @@ class IntComputer:
         self.program[position] = result
 
     def input(self, values):
-        self.program[values[0][0]] = int(input())
+        self.program[values[0][0]] = self.get_input()
 
     def output(self, values):
         out = self.get_value(values[0])
-        print(out)
+        if self.piped_output is not None:
+            self.piped_output.append(out)
+        else:
+            print(out)
 
     def jump_if_true(self, values):
         val = self.get_value(values[0])
@@ -117,3 +127,12 @@ class IntComputer:
             return self.program[v[0]]
         else:
             return v[0]
+
+    def get_input(self):
+        if self.piped_input:
+            return self.piped_input.pop(0)
+        else:
+            return int(input())
+
+    def get_output(self):
+        return self.piped_output

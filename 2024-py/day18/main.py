@@ -1,3 +1,5 @@
+from kryptikkaocutils.Timer import timer
+
 grid_size = 71
 
 f = open("i.txt")
@@ -49,14 +51,22 @@ def search_for_end(cutoff):
                 pq.append((tentative_d, neighbor))
     return dist[end] if end in dist else None
 
-print("p1:", search_for_end(1024))
-left, right = 1024, len(b)
-while True:
-    mid = (left + right) // 2
-    if left + 1 == right:
-        break
-    if search_for_end(mid) == 1e10:
-        right = mid
-    else:
-        left = mid
-print("p2:", b[left])
+@timer
+def part1():
+    print("p1:", search_for_end(1024))
+
+@timer
+def part2():
+    left, right = 1024, len(b)
+    while True:
+        mid = (left + right) // 2
+        if left + 1 == right:
+            break
+        if search_for_end(mid) == 1e10:
+            right = mid
+        else:
+            left = mid
+    print("p2:", b[left])
+
+part1()
+part2()
