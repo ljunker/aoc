@@ -2,6 +2,7 @@
 **/input.txt
 **/i.txt
 **/sample*.txt
+**/program*.txt
 .venv
 .env
 .aoc_tiles/*
