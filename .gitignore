@@ -4,6 +4,7 @@
 **/sample*.txt
 **/program*.txt
 .venv
+venv
 .env
 .aoc_tiles/*
 !.aoc_tiles/tiles/

@@ -1,3 +1,2 @@
-kryptikkaocutils=0.0.3
-dotenv
-requests
+kryptikkaocutils
+python-dotenv
