@@ -10,7 +10,6 @@ class Moon:
         self.y = int(match.group(2))
         self.z = int(match.group(3))
         self.vx, self.vy, self.vz = 0, 0, 0
-        self.configs = dict()
 
     def apply_gravity(self, ax, ay, az):
         self.vx += ax
@@ -27,11 +26,6 @@ class Moon:
 
     def kin(self):
         return abs(self.vx) + abs(self.vy) + abs(self.vz)
-
-    def check_config(self, i, conf):
-        if conf in self.configs:
-            return i - self.configs[conf]
-        self.configs[conf] = i
 
 
 def apply_gravity(m0, m1):
