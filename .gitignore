@@ -9,3 +9,4 @@ venv
 .aoc_tiles/*
 !.aoc_tiles/tiles/
 session.cookie
+.aoc_cache
