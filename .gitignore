@@ -10,3 +10,5 @@ venv
 !.aoc_tiles/tiles/
 session.cookie
 .aoc_cache
+IntComputer/__pycache__
+aocfw/__pycache__
