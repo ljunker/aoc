@@ -6,6 +6,6 @@ repos:
             args:
                 - --auto-add-tiles-to-git=amend
                 - --language-sorting=py,go
-                - --count-as-solved-when=either
+                - --count-as-solved-when=both
                 - --year-pattern=(?<!\d)(20[123]\d)-(?:py|go)(?=/)
                 - --exclude-patterns=2025-py/**/*.py
