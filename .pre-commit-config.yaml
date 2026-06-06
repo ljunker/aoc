@@ -8,3 +8,4 @@ repos:
                 - --language-sorting=py,go
                 - --count-as-solved-when=either
                 - --year-pattern=(?<!\d)(20[123]\d)-(?:py|go)(?=/)
+                - --exclude-patterns=2025-py/*

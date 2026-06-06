@@ -169,10 +169,10 @@
 <h1 align="center">
   2016 - 38 ⭐ - Python
 </h1>
-<a href="2016-py/day01/2026_day01.py">
+<a href="2016-py/day01/2016_day01.py">
   <img src=".aoc_tiles/tiles/2016/01.png" width="161px">
 </a>
-<a href="2016-py/day02/2026_day02.py">
+<a href="2016-py/day02/2016_day02.py">
   <img src=".aoc_tiles/tiles/2016/02.png" width="161px">
 </a>
 <a href="2016-py/day03/2016_day03.py">
