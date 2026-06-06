@@ -29,6 +29,8 @@ fi
 mkdir -p "$DIR_NAME"
 
 cat >"$FNAME" <<EOF
+import time
+
 from aocfw import AdventOfCodeClient
 
 YEAR = ${YEAR}
@@ -51,6 +53,8 @@ if __name__ == "__main__":
     print("Part 1:", answer)
     res = client.submit_answer(YEAR, DAY, 1, answer)
     print(res.message)
+
+    time.sleep(10)
 
     answer = part2(data)
     print("Part 2:", answer)

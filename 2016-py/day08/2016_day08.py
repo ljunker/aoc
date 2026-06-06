@@ -1,3 +1,5 @@
+import time
+
 from aocfw import AdventOfCodeClient
 
 YEAR = 2016
@@ -93,8 +95,10 @@ if __name__ == "__main__":
     data = client.get_input(YEAR, DAY)
     answer = part1(data)
     print("Part 1:", answer)
-    # res = client.submit_answer(YEAR, DAY, 1, answer)
-    # print(res.message)
+    res = client.submit_answer(YEAR, DAY, 1, answer)
+    print(res.message)
+
+    time.sleep(10)
 
     answer = part2(data)
     print("Part 2:", answer)
